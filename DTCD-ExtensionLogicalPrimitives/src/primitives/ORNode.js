@@ -62,7 +62,12 @@ export default class ObjectModelPrimitive {
           type: 'OUT',
           properties: {
             status: {
-              expression: '',
+              expression: `
+              let portOwner = graph.ports.find(port => port.tag.primitiveID == primitiveID).owner;
+
+              let inEdges = graph.inEdgesAt(portOwner).toArray()
+
+              inEdges.reduce((result, current) => result || current.sourcePort.tag.properties.status.value, 0)`,
               type: 'expression',
             },
           },

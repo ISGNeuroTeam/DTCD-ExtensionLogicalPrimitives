@@ -26,7 +26,7 @@ export default class ObjectModelPrimitive {
       properties: {},
       initPorts: [
         {
-          portName: 'inPort1',
+          primitiveName: 'inPort_1',
           portPosition: {
             x: 0.2,
             y: 0.95,
@@ -40,7 +40,7 @@ export default class ObjectModelPrimitive {
           },
         },
         {
-          portName: 'inPort2',
+          primitiveName: 'inPort_2',
           portPosition: {
             x: 0.8,
             y: 0.95,
@@ -54,7 +54,7 @@ export default class ObjectModelPrimitive {
           },
         },
         {
-          portName: 'outPort1',
+          primitiveName: 'outPort_1',
           portPosition: {
             x: 0.5,
             y: 0.05,
@@ -62,7 +62,12 @@ export default class ObjectModelPrimitive {
           type: 'OUT',
           properties: {
             status: {
-              expression: ``,
+              expression: `
+              let portOwner = graph.ports.find(port => port.tag.primitiveID == primitiveID).owner;
+
+              let inEdges = graph.inEdgesAt(portOwner).toArray()
+
+              inEdges.reduce((result, current) => result && current.sourcePort.tag.properties.status.value, 1)`,
               type: 'expression',
             },
           },
