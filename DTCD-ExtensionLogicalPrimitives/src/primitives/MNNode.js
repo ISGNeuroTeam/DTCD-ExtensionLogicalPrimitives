@@ -23,10 +23,15 @@ export default class ObjectModelPrimitive {
     });
     instance.layout = new this.yfiles.Rect(0, 0, 130, 60);
     instance.tag = {
-      properties: {},
+      properties: {
+        M: {
+          expression: '',
+          type: 'expression',
+        },
+      },
       initPorts: [
         {
-          portName: 'inPort1',
+          primitiveName: 'inPort_1',
           portPosition: {
             x: 0.2,
             y: 0.95,
@@ -40,7 +45,21 @@ export default class ObjectModelPrimitive {
           },
         },
         {
-          portName: 'inPort2',
+          primitiveName: 'inPort_2',
+          portPosition: {
+            x: 0.5,
+            y: 0.95,
+          },
+          type: 'IN',
+          properties: {
+            status: {
+              expression: '',
+              type: 'expression',
+            },
+          },
+        },
+        {
+          primitiveName: 'inPort_3',
           portPosition: {
             x: 0.8,
             y: 0.95,
@@ -54,7 +73,7 @@ export default class ObjectModelPrimitive {
           },
         },
         {
-          portName: 'outPort1',
+          primitiveName: 'outPort_1',
           portPosition: {
             x: 0.5,
             y: 0.05,
@@ -62,7 +81,14 @@ export default class ObjectModelPrimitive {
           type: 'OUT',
           properties: {
             status: {
-              expression: ``,
+              expression: `let portOwner = graph.ports.find(port => port.tag.primitiveID == primitiveID).owner;
+let inEdges = graph.inEdgesAt(portOwner).toArray()
+if(inEdges.length < 1) false
+else {
+  if(inEdges.reduce((result, current) => result + Boolean(eval(current.sourcePort.tag.primitiveID).status), 0) 
+  >= eval(portOwner.tag.primitiveID).M) true
+  else false
+}`,
               type: 'expression',
             },
           },

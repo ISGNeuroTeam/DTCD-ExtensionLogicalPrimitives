@@ -23,10 +23,15 @@ export default class ObjectModelPrimitive {
     });
     instance.layout = new this.yfiles.Rect(0, 0, 130, 60);
     instance.tag = {
-      properties: {},
+      properties: {
+        onlyConnectedPorts: {
+          expression: 'true',
+          type: 'expression',
+        },
+      },
       initPorts: [
         {
-          portName: 'inPort1',
+          primitiveName: 'inPort_1',
           portPosition: {
             x: 0.2,
             y: 0.95,
@@ -40,7 +45,7 @@ export default class ObjectModelPrimitive {
           },
         },
         {
-          portName: 'inPort2',
+          primitiveName: 'inPort_2',
           portPosition: {
             x: 0.8,
             y: 0.95,
@@ -54,7 +59,7 @@ export default class ObjectModelPrimitive {
           },
         },
         {
-          portName: 'outPort1',
+          primitiveName: 'outPort_1',
           portPosition: {
             x: 0.5,
             y: 0.05,
@@ -62,12 +67,18 @@ export default class ObjectModelPrimitive {
           type: 'OUT',
           properties: {
             status: {
-              expression: `
-              let portOwner = graph.ports.find(port => port.tag.primitiveID == primitiveID).owner;
-
-              let inEdges = graph.inEdgesAt(portOwner).toArray()
-
-              inEdges.reduce((result, current) => result || current.sourcePort.tag.properties.status.value, 0)`,
+              expression: `let portOwner = graph.ports.find(port => port.tag.primitiveID == primitiveID).owner;
+let inEdges = graph.inEdgesAt(portOwner).toArray()
+if(inEdges.length < 1) false
+else if (!eval(portOwner.tag.primitiveID).onlyConnectedPorts) {
+  if(inEdges.length < portOwner.ports.size - 1) false
+  else {
+    inEdges.reduce((result, current) => result || Boolean(eval(current.sourcePort.tag.primitiveID).status), 0)
+  }
+}
+else{
+  inEdges.reduce((result, current) => result || Boolean(eval(current.sourcePort.tag.primitiveID).status), 0)
+}`,
               type: 'expression',
             },
           },
