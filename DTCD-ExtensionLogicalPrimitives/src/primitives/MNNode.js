@@ -28,6 +28,10 @@ export default class ObjectModelPrimitive {
           expression: '',
           type: 'expression',
         },
+        onlyConnectedPorts: {
+          expression: 'true',
+          type: 'expression',
+        },
       },
       initPorts: [
         {
@@ -84,6 +88,14 @@ export default class ObjectModelPrimitive {
               expression: `let portOwner = graph.ports.find(port => port.tag.primitiveID == primitiveID).owner;
 let inEdges = graph.inEdgesAt(portOwner).toArray()
 if(inEdges.length < 1) false
+else if (!eval(portOwner.tag.primitiveID).onlyConnectedPorts) {
+  if(inEdges.length < portOwner.ports.size - 1) throw new Error("Connect remaining pots of node '" + portOwner.tag.primitiveID + "'!")
+  else {
+    if(inEdges.reduce((result, current) => result + Boolean(eval(current.sourcePort.tag.primitiveID).status), 0) 
+    >= eval(portOwner.tag.primitiveID).M) true
+    else false
+  }
+}
 else {
   if(inEdges.reduce((result, current) => result + Boolean(eval(current.sourcePort.tag.primitiveID).status), 0) 
   >= eval(portOwner.tag.primitiveID).M) true

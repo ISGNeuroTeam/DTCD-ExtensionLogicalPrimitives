@@ -71,7 +71,7 @@ export default class ObjectModelPrimitive {
 let inEdges = graph.inEdgesAt(portOwner).toArray()
 if(inEdges.length < 1) false
 else if (!eval(portOwner.tag.primitiveID).onlyConnectedPorts) {
-  if(inEdges.length < portOwner.ports.size - 1) false
+  if(inEdges.length < portOwner.ports.size - 1) throw new Error("Connect remaining pots of node '" + portOwner.tag.primitiveID + "'!")
   else {
     inEdges.reduce((result, current) => result && Boolean(eval(current.sourcePort.tag.primitiveID).status), 1)
   }

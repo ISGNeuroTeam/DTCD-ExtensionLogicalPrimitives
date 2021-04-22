@@ -8,3 +8,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 - Init repo
+
+### Added
+
+- throwing error if there are remaining ports in logical primitive in !onlyConnectedPorts mode
+- added onlyConnectedPorts modes to M:N node
