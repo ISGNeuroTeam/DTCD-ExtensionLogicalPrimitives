@@ -1,4 +1,4 @@
-import icon from './AND_DIN.svg';
+import icon from './mn.svg';
 
 export default class ObjectModelPrimitive {
   static getPrimitiveInfo() {

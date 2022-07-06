@@ -52,7 +52,7 @@ tar -zxf DTCD-ExtensionLogicalPrimitives-*.tar.gz
 
 ## Versioning
 
-We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/ISGNeuroTeam/DTCD-LogSystem/tags).
+We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/ISGNeuroTeam/DTCD-ExtensionLogicalPrimitives/tags).
 
 Also you can see the [CHANGELOG](CHANGELOG.md) file.
 

@@ -1,10 +1,10 @@
-import icon from './AND_DIN.svg';
+import icon from './or.svg';
 
 export default class ObjectModelPrimitive {
   static getPrimitiveInfo() {
     return {
-      title: 'Узел И',
-      name: 'ANDNode',
+      title: 'Узел ИЛИ',
+      name: 'ORNode',
       groups: ['Логические узлы'],
       icon,
     };
@@ -19,7 +19,7 @@ export default class ObjectModelPrimitive {
     instance.style = new this.yfiles.ShapeNodeStyle({
       shape: this.yfiles.ShapeNodeShape.TRIANGLE,
       stroke: 'rgb(0, 0, 0)',
-      fill: 'rgb(0, 150, 100)',
+      fill: 'rgb(255, 200, 150)',
     });
     instance.layout = new this.yfiles.Rect(0, 0, 130, 60);
     instance.tag = {
@@ -73,11 +73,11 @@ if(inEdges.length < 1) false
 else if (!eval(portOwner.tag.primitiveID).onlyConnectedPorts) {
   if(inEdges.length < portOwner.ports.size - 1) throw new Error("Connect remaining pots of node '" + portOwner.tag.primitiveID + "'!")
   else {
-    inEdges.reduce((result, current) => result && Boolean(eval(current.sourcePort.tag.primitiveID).status), 1)
+    inEdges.reduce((result, current) => result || Boolean(eval(current.sourcePort.tag.primitiveID).status), 0)
   }
 }
 else{
-  inEdges.reduce((result, current) => result && Boolean(eval(current.sourcePort.tag.primitiveID).status), 1)
+  inEdges.reduce((result, current) => result || Boolean(eval(current.sourcePort.tag.primitiveID).status), 0)
 }`,
               type: 'expression',
             },
