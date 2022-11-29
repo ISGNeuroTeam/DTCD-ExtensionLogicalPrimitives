@@ -31,10 +31,10 @@ export default class ObjectModelPrimitive {
       },
       initPorts: [
         {
-          primitiveName: 'inPort_1',
+          primitiveName: 'inPort1',
           portPosition: {
             x: 0.2,
-            y: 0.95,
+            y: 1,
           },
           type: 'IN',
           properties: {
@@ -45,10 +45,10 @@ export default class ObjectModelPrimitive {
           },
         },
         {
-          primitiveName: 'inPort_2',
+          primitiveName: 'inPort2',
           portPosition: {
             x: 0.8,
-            y: 0.95,
+            y: 1,
           },
           type: 'IN',
           properties: {
@@ -59,10 +59,10 @@ export default class ObjectModelPrimitive {
           },
         },
         {
-          primitiveName: 'outPort_1',
+          primitiveName: 'outPort1',
           portPosition: {
             x: 0.5,
-            y: 0.05,
+            y: 0,
           },
           type: 'OUT',
           properties: {

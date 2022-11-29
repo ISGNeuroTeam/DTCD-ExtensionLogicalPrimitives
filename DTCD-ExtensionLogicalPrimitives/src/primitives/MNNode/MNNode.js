@@ -35,10 +35,10 @@ export default class ObjectModelPrimitive {
       },
       initPorts: [
         {
-          primitiveName: 'inPort_1',
+          primitiveName: 'inPort1',
           portPosition: {
             x: 0.2,
-            y: 0.95,
+            y: 1,
           },
           type: 'IN',
           properties: {
@@ -49,10 +49,10 @@ export default class ObjectModelPrimitive {
           },
         },
         {
-          primitiveName: 'inPort_2',
+          primitiveName: 'inPort2',
           portPosition: {
             x: 0.5,
-            y: 0.95,
+            y: 1,
           },
           type: 'IN',
           properties: {
@@ -63,10 +63,10 @@ export default class ObjectModelPrimitive {
           },
         },
         {
-          primitiveName: 'inPort_3',
+          primitiveName: 'inPort3',
           portPosition: {
             x: 0.8,
-            y: 0.95,
+            y: 1,
           },
           type: 'IN',
           properties: {
@@ -77,10 +77,10 @@ export default class ObjectModelPrimitive {
           },
         },
         {
-          primitiveName: 'outPort_1',
+          primitiveName: 'outPort1',
           portPosition: {
             x: 0.5,
-            y: 0.05,
+            y: 0,
           },
           type: 'OUT',
           properties: {
@@ -91,13 +91,13 @@ if(inEdges.length < 1) false
 else if (!eval(portOwner.tag.primitiveID).onlyConnectedPorts) {
   if(inEdges.length < portOwner.ports.size - 1) throw new Error("Connect remaining pots of node '" + portOwner.tag.primitiveID + "'!")
   else {
-    if(inEdges.reduce((result, current) => result + Boolean(eval(current.sourcePort.tag.primitiveID).status), 0) 
+    if(inEdges.reduce((result, current) => result + Boolean(eval(current.sourcePort.tag.primitiveID).status), 0)
     >= eval(portOwner.tag.primitiveID).M) true
     else false
   }
 }
 else {
-  if(inEdges.reduce((result, current) => result + Boolean(eval(current.sourcePort.tag.primitiveID).status), 0) 
+  if(inEdges.reduce((result, current) => result + Boolean(eval(current.sourcePort.tag.primitiveID).status), 0)
   >= eval(portOwner.tag.primitiveID).M) true
   else false
 }`,
